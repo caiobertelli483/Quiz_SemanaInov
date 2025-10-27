@@ -27,6 +27,14 @@ export function QuizSetup({ onStart, initialQuestions, onUpdate }: QuizSetupProp
         ],
   )
 
+  // Atualizar quando initialQuestions mudar
+  useEffect(() => {
+    if (initialQuestions && initialQuestions.length > 0) {
+      setQuestions(initialQuestions)
+    }
+  }, [initialQuestions])
+
+  // Chamar onUpdate quando as perguntas mudarem
   useEffect(() => {
     if (onUpdate) {
       onUpdate(questions)
@@ -143,7 +151,7 @@ export function QuizSetup({ onStart, initialQuestions, onUpdate }: QuizSetupProp
           onClick={() => onStart(questions)}
           disabled={!canStart}
           size="lg"
-          className="gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 shadow-xl"
+          className="gap-2 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 shadow-xl"
         >
           <Play className="h-5 w-5" />
           Iniciar Quiz

@@ -13,36 +13,51 @@ export type Question = {
 
 export type GameState = "setup" | "playing" | "results"
 
-const STORAGE_KEY = "quiz-questions"
-
 export default function QuizPage() {
   const [gameState, setGameState] = useState<GameState>("setup")
   const [questions, setQuestions] = useState<Question[]>([])
   const [playerAScore, setPlayerAScore] = useState(0)
   const [playerBScore, setPlayerBScore] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
 
+  // Carregar perguntas do servidor ao iniciar
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved) {
+    const loadQuestions = async () => {
       try {
-        const parsed = JSON.parse(saved)
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setQuestions(parsed)
+        const response = await fetch('/api/questions')
+        if (response.ok) {
+          const data = await response.json()
+          if (Array.isArray(data) && data.length > 0) {
+            setQuestions(data)
+          }
         }
       } catch (e) {
-        console.error("Failed to load saved questions", e)
+        console.error("Failed to load questions from server", e)
+      } finally {
+        setIsLoading(false)
       }
     }
+    loadQuestions()
   }, [])
 
-  useEffect(() => {
-    if (questions.length > 0) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(questions))
+  // Salvar perguntas no servidor quando alteradas
+  const saveQuestions = async (newQuestions: Question[]) => {
+    try {
+      await fetch('/api/questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newQuestions),
+      })
+    } catch (e) {
+      console.error("Failed to save questions to server", e)
     }
-  }, [questions])
+  }
 
   const startGame = (newQuestions: Question[]) => {
     setQuestions(newQuestions)
+    saveQuestions(newQuestions)
     setPlayerAScore(0)
     setPlayerBScore(0)
     setGameState("playing")
@@ -73,10 +88,19 @@ export default function QuizPage() {
 
   const updateQuestions = (newQuestions: Question[]) => {
     setQuestions(newQuestions)
+    saveQuestions(newQuestions)
+  }
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-linear-to-br from-blue-600 via-blue-400 to-yellow-400 flex items-center justify-center">
+        <div className="text-white text-2xl font-bold">Carregando perguntas...</div>
+      </main>
+    )
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-400 to-yellow-400 relative overflow-hidden">
+    <main className="min-h-screen bg-linear-to-br from-blue-600 via-blue-400 to-yellow-400 relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div

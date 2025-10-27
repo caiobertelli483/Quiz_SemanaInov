@@ -39,7 +39,7 @@ export function QuizGame({ questions, onGameEnd, onEdit }: QuizGameProps) {
   const handleKeyPress = useCallback(
     (e: KeyboardEvent) => {
       if (phase === "waiting" && !activePlayer && timer === 0) {
-        if (e.key === "Tab") {
+        if (e.key === "CapsLock") {
           e.preventDefault()
           setActivePlayer("A")
           setPhase("answering")
@@ -96,8 +96,8 @@ export function QuizGame({ questions, onGameEnd, onEdit }: QuizGameProps) {
     <div className="container mx-auto px-4 py-8 max-w-5xl">
       {/* Header with scores */}
       <div className="flex items-center justify-between mb-8">
-        <Card className="px-6 py-4 bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-xl">
-          <div className="text-sm font-medium opacity-90">Jogador A (TAB)</div>
+        <Card className="px-6 py-4 bg-linear-to-br from-blue-500 to-blue-600 text-white border-0 shadow-xl">
+          <div className="text-sm font-medium opacity-90">Jogador A (CAPS LOCK)</div>
           <div className="text-3xl font-bold">{scoreA}</div>
         </Card>
 
@@ -114,7 +114,7 @@ export function QuizGame({ questions, onGameEnd, onEdit }: QuizGameProps) {
           </Button>
         </div>
 
-        <Card className="px-6 py-4 bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 border-0 shadow-xl">
+        <Card className="px-6 py-4 bg-linear-to-br from-yellow-400 to-yellow-500 text-gray-900 border-0 shadow-xl">
           <div className="text-sm font-medium opacity-90">Jogador B (ENTER)</div>
           <div className="text-3xl font-bold">{scoreB}</div>
         </Card>
@@ -139,7 +139,7 @@ export function QuizGame({ questions, onGameEnd, onEdit }: QuizGameProps) {
               <div
                 className={`px-4 py-2 rounded-lg font-medium transition-all ${timer === 0 ? "bg-blue-500 text-white animate-pulse" : "bg-blue-100 text-blue-700"}`}
               >
-                Jogador A: TAB
+                Jogador A: CAPS LOCK
               </div>
               <div
                 className={`px-4 py-2 rounded-lg font-medium transition-all ${timer === 0 ? "bg-yellow-400 text-gray-900 animate-pulse" : "bg-yellow-100 text-yellow-700"}`}

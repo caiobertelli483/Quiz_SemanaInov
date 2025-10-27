@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Qual é a capital do Brasil?",
+    "options": [
+      "São Paulo",
+      "Rio de Janeiro",
+      "Brasília",
+      "Salvador"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "dd",
+    "options": [
+      "ddd",
+      "dd",
+      "ddddd",
+      "d"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "AA",
+    "options": [
+      "A",
+      "C",
+      "B",
+      "D"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "C",
+    "options": [
+      "C",
+      "B",
+      "A",
+      "D"
+    ],
+    "correctAnswer": 0
+  }
+]

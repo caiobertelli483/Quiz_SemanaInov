@@ -64,7 +64,7 @@ export function QuizResults({
 
       {winner === "Empate" && (
         <div className="text-center mb-8">
-          <div className="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-yellow-500 text-white rounded-xl font-bold text-xl shadow-lg">
+          <div className="inline-block px-6 py-3 bg-linear-to-r from-blue-500 to-yellow-500 text-white rounded-xl font-bold text-xl shadow-lg">
             🤝 Empate! Ambos jogaram muito bem!
           </div>
         </div>
@@ -74,7 +74,7 @@ export function QuizResults({
         <Button
           onClick={onRestartSameQuiz}
           size="lg"
-          className="gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 shadow-xl"
+          className="gap-2 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 shadow-xl"
         >
           <RotateCcw className="h-5 w-5" />
           Recomeçar Quiz
