@@ -112,6 +112,17 @@ export default function QuizPage() {
         />
       </div>
 
+      {/* Logo MRS como marca d'água */}
+      <div 
+        className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5"
+        style={{
+          backgroundImage: "url('/logo-mrs.svg')",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center center",
+          backgroundSize: "50%",
+        }}
+      />
+
       {/* Animated circles */}
       <div className="absolute top-20 left-10 w-64 h-64 bg-yellow-300 rounded-full blur-3xl opacity-20 animate-pulse" />
       <div
